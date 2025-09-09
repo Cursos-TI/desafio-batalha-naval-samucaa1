@@ -1,61 +1,96 @@
 #include <stdio.h>
 
-#define TAM 10     // Tamanho fixo do tabuleiro 10x10
-#define NAVIO 3    // Valor que representa navio
-#define TAMANHO 3  // Tamanho fixo dos navios (3 posições)
+#define TAM 5  // Para simplificação, habilidades serão exibidas em matrizes 5x5
 
 int main() {
     // ============================
-    // DECLARAÇÃO E INICIALIZAÇÃO
+    // MATRIZES PARA HABILIDADES
     // ============================
-    int tabuleiro[TAM][TAM];
+    int cone[TAM][TAM];
+    int cruz[TAM][TAM];
+    int octaedro[TAM][TAM];
 
-    // Inicializar tabuleiro com 0 (água)
+    // ============================
+    // HABILIDADE EM CONE
+    // ============================
+    // Preencher tudo com 0
     for (int i = 0; i < TAM; i++) {
         for (int j = 0; j < TAM; j++) {
-            tabuleiro[i][j] = 0;
+            cone[i][j] = 0;
         }
     }
 
-    // ============================
-    // POSICIONAMENTO DOS NAVIOS
-    // ============================
-
-    // Navio horizontal
-    int linhaHorizontal = 2;
-    int colunaHorizontal = 1;
-    for (int i = 0; i < TAMANHO; i++) {
-        tabuleiro[linhaHorizontal][colunaHorizontal + i] = NAVIO;
+    // Criar padrão em cone
+    // Linha 2 -> todos 1
+    for (int j = 0; j < TAM; j++) {
+        cone[2][j] = 1;
     }
-
-    // Navio vertical
-    int linhaVertical = 0;
-    int colunaVertical = 5;
-    for (int i = 0; i < TAMANHO; i++) {
-        tabuleiro[linhaVertical + i][colunaVertical] = NAVIO;
+    // Linha 1 -> colunas 1,2,3
+    for (int j = 1; j <= 3; j++) {
+        cone[1][j] = 1;
     }
-
-    // Navio diagonal principal (\)
-    int linhaDiagonal1 = 4;
-    int colunaDiagonal1 = 2;
-    for (int i = 0; i < TAMANHO; i++) {
-        tabuleiro[linhaDiagonal1 + i][colunaDiagonal1 + i] = NAVIO;
-    }
-
-    // Navio diagonal secundária (/)
-    int linhaDiagonal2 = 7;
-    int colunaDiagonal2 = 6;
-    for (int i = 0; i < TAMANHO; i++) {
-        tabuleiro[linhaDiagonal2 - i][colunaDiagonal2 + i] = NAVIO;
-    }
+    // Linha 0 -> coluna 2
+    cone[0][2] = 1;
 
     // ============================
-    // EXIBIÇÃO DO TABULEIRO
+    // HABILIDADE EM CRUZ
     // ============================
-    printf("=== Tabuleiro 10x10 ===\n\n");
+    // Preencher tudo com 0
     for (int i = 0; i < TAM; i++) {
         for (int j = 0; j < TAM; j++) {
-            printf("%d ", tabuleiro[i][j]);
+            cruz[i][j] = 0;
+        }
+    }
+
+    // Linha central inteira
+    for (int j = 0; j < TAM; j++) {
+        cruz[2][j] = 1;
+    }
+    // Coluna central inteira
+    for (int i = 0; i < TAM; i++) {
+        cruz[i][2] = 1;
+    }
+
+    // ============================
+    // HABILIDADE EM OCTAEDRO
+    // ============================
+    // Preencher tudo com 0
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            octaedro[i][j] = 0;
+        }
+    }
+
+    // Padrão em forma de diamante (octaedro)
+    octaedro[0][2] = 1;
+    octaedro[1][1] = octaedro[1][2] = octaedro[1][3] = 1;
+    octaedro[2][2] = 1;
+    octaedro[3][1] = octaedro[3][2] = octaedro[3][3] = 1;
+    octaedro[4][2] = 1;
+
+    // ============================
+    // EXIBIÇÃO DAS MATRIZES
+    // ============================
+    printf("=== Habilidade em CONE ===\n");
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            printf("%d ", cone[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n=== Habilidade em CRUZ ===\n");
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            printf("%d ", cruz[i][j]);
+        }
+        printf("\n");
+    }
+
+    printf("\n=== Habilidade em OCTAEDRO ===\n");
+    for (int i = 0; i < TAM; i++) {
+        for (int j = 0; j < TAM; j++) {
+            printf("%d ", octaedro[i][j]);
         }
         printf("\n");
     }
